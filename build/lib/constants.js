@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.BOOK_KEYWORDS = exports.MEDICINE_KEYWORDS = exports.FOOD_KEYWORDS = exports.IMPORTED_PHRASE = exports.CATEGORY = exports.EXIT_CODES = void 0;
+exports.GENERAL_RATE = exports.IMPORT_RATE = exports.BOOK_KEYWORDS = exports.MEDICINE_KEYWORDS = exports.FOOD_KEYWORDS = exports.IMPORTED_PHRASE = exports.CATEGORY = exports.EXIT_CODES = void 0;
 var EXIT_CODES;
 (function (EXIT_CODES) {
     EXIT_CODES[EXIT_CODES["NO_ERROR"] = 0] = "NO_ERROR";
@@ -17,4 +17,6 @@ exports.IMPORTED_PHRASE = 'imported';
 exports.FOOD_KEYWORDS = ['chocolate'];
 exports.MEDICINE_KEYWORDS = ['pill'];
 exports.BOOK_KEYWORDS = ['book'];
+exports.IMPORT_RATE = 0.05;
+exports.GENERAL_RATE = 0.1;
 //# sourceMappingURL=constants.js.map

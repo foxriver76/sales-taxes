@@ -1,6 +1,6 @@
 import { CATEGORY, IMPORTED_PHRASE } from './constants';
 
-interface BasketItem {
+export interface BasketItem {
     /** if item has been imported */
     imported: boolean;
     /** name of the item */
