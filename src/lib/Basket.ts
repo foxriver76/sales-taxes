@@ -1,4 +1,10 @@
-import { CATEGORY, IMPORTED_PHRASE } from './constants';
+import {
+    CATEGORY,
+    DEFAULT_BOOK_KEYWORDS,
+    DEFAULT_FOOD_KEYWORDS,
+    DEFAULT_IMPORTED_PHRASE,
+    DEFAULT_MEDICINE_KEYWORDS
+} from './constants';
 
 export interface BasketItem {
     /** if item has been imported */
@@ -25,10 +31,16 @@ export class Basket {
     private readonly medicineKeywords: string[];
     private readonly bookKeywords: string[];
 
-    constructor(options: BasketOptions) {
-        this.foodKeywords = options.foodKeywords;
-        this.medicineKeywords = options.medicineKeywords;
-        this.bookKeywords = options.bookKeywords;
+    constructor(options?: BasketOptions) {
+        if (options) {
+            this.foodKeywords = options.foodKeywords;
+            this.medicineKeywords = options.medicineKeywords;
+            this.bookKeywords = options.bookKeywords;
+        } else {
+            this.foodKeywords = DEFAULT_FOOD_KEYWORDS;
+            this.medicineKeywords = DEFAULT_MEDICINE_KEYWORDS;
+            this.bookKeywords = DEFAULT_BOOK_KEYWORDS;
+        }
     }
 
     /**
@@ -57,12 +69,12 @@ export class Basket {
         const countPhrase = descriptionPhrase.split(' ')[0];
         const itemPhrase = descriptionPhrase.substring(countPhrase.length + 1);
 
-        const isImported = itemPhrase.includes(IMPORTED_PHRASE);
+        const isImported = itemPhrase.includes(DEFAULT_IMPORTED_PHRASE);
 
         let itemName: string;
 
         if (isImported) {
-            const subphrases = itemPhrase.split(`${IMPORTED_PHRASE} `);
+            const subphrases = itemPhrase.split(`${DEFAULT_IMPORTED_PHRASE} `);
             itemName = subphrases.join('');
         } else {
             itemName = itemPhrase;

@@ -3,17 +3,9 @@ import { roundUp } from '../src/lib/utils';
 import { expect } from 'chai';
 import { Basket } from '../src/lib/Basket';
 import { TaxCalculator } from '../src/lib/TaxCalculator';
-import {
-    BOOK_KEYWORDS,
-    FOOD_KEYWORDS,
-    MEDICINE_KEYWORDS,
-    PRECISION,
-    CATEGORY,
-    GENERAL_RATE,
-    IMPORT_RATE
-} from '../src/lib/constants';
-import { Receipt } from '../src/lib/Receipt';
+import { CATEGORY } from '../src/lib/constants';
 import fs from 'fs';
+import { getSummaryForContent } from './helper';
 
 describe('Test utils', () => {
     it('Should round correctly', async () => {
@@ -27,11 +19,7 @@ describe('Test utils', () => {
 
 describe('Test Basket', () => {
     it('Should add category book', () => {
-        const basket = new Basket({
-            medicineKeywords: MEDICINE_KEYWORDS,
-            foodKeywords: FOOD_KEYWORDS,
-            bookKeywords: BOOK_KEYWORDS
-        });
+        const basket = new Basket();
 
         basket.addItem('1 book at 12.49');
 
@@ -45,11 +33,7 @@ describe('Test Basket', () => {
     });
 
     it('Should add category medicine', () => {
-        const basket = new Basket({
-            medicineKeywords: MEDICINE_KEYWORDS,
-            foodKeywords: FOOD_KEYWORDS,
-            bookKeywords: BOOK_KEYWORDS
-        });
+        const basket = new Basket();
 
         basket.addItem('1 packet of headache pills at 9.75');
 
@@ -63,11 +47,7 @@ describe('Test Basket', () => {
     });
 
     it('Should add category food', () => {
-        const basket = new Basket({
-            medicineKeywords: MEDICINE_KEYWORDS,
-            foodKeywords: FOOD_KEYWORDS,
-            bookKeywords: BOOK_KEYWORDS
-        });
+        const basket = new Basket();
 
         basket.addItem('3 imported box of chocolates at 10.50');
 
@@ -81,11 +61,7 @@ describe('Test Basket', () => {
     });
 
     it('Should add category other', () => {
-        const basket = new Basket({
-            medicineKeywords: MEDICINE_KEYWORDS,
-            foodKeywords: FOOD_KEYWORDS,
-            bookKeywords: BOOK_KEYWORDS
-        });
+        const basket = new Basket();
 
         basket.addItem('1 bottle of imported perfume at 32.19');
 
@@ -101,11 +77,7 @@ describe('Test Basket', () => {
 
 describe('Test TaxCalculator', () => {
     it('Should calculate only import tax', () => {
-        const taxCalculator = new TaxCalculator({
-            generalRate: GENERAL_RATE,
-            importRate: IMPORT_RATE,
-            precision: PRECISION
-        });
+        const taxCalculator = new TaxCalculator();
 
         const tax = taxCalculator.calculateTax({
             price: 10,
@@ -119,11 +91,7 @@ describe('Test TaxCalculator', () => {
     });
 
     it('Should calculate no tax', () => {
-        const taxCalculator = new TaxCalculator({
-            generalRate: GENERAL_RATE,
-            importRate: IMPORT_RATE,
-            precision: PRECISION
-        });
+        const taxCalculator = new TaxCalculator();
 
         const tax = taxCalculator.calculateTax({
             price: 10,
@@ -137,11 +105,7 @@ describe('Test TaxCalculator', () => {
     });
 
     it('Should calculate general tax', () => {
-        const taxCalculator = new TaxCalculator({
-            generalRate: GENERAL_RATE,
-            importRate: IMPORT_RATE,
-            precision: PRECISION
-        });
+        const taxCalculator = new TaxCalculator();
 
         const tax = taxCalculator.calculateTax({
             price: 10,
@@ -155,11 +119,7 @@ describe('Test TaxCalculator', () => {
     });
 
     it('Should calculate both taxes', () => {
-        const taxCalculator = new TaxCalculator({
-            generalRate: GENERAL_RATE,
-            importRate: IMPORT_RATE,
-            precision: PRECISION
-        });
+        const taxCalculator = new TaxCalculator();
 
         const tax = taxCalculator.calculateTax({
             price: 10,
@@ -173,11 +133,7 @@ describe('Test TaxCalculator', () => {
     });
 
     it('Should calculate both taxes for three items, still for each', () => {
-        const taxCalculator = new TaxCalculator({
-            generalRate: GENERAL_RATE,
-            importRate: IMPORT_RATE,
-            precision: PRECISION
-        });
+        const taxCalculator = new TaxCalculator();
 
         const tax = taxCalculator.calculateTax({
             price: 10,
@@ -203,26 +159,7 @@ describe('Test Receipt', () => {
             'Sales Taxes: 1.50\n' +
             'Total: 29.83';
 
-        const basket = new Basket({
-            medicineKeywords: MEDICINE_KEYWORDS,
-            foodKeywords: FOOD_KEYWORDS,
-            bookKeywords: BOOK_KEYWORDS
-        });
-        const contentLines = content.split('\n');
-
-        for (const line of contentLines) {
-            basket.addItem(line);
-        }
-
-        const items = basket.getItems();
-
-        const receipt = new Receipt({ generalRate: GENERAL_RATE, importRate: IMPORT_RATE, precision: PRECISION });
-
-        for (const item of items) {
-            receipt.addItem(item);
-        }
-
-        expect(receipt.getSummary()).to.be.equal(res);
+        expect(getSummaryForContent(content)).to.be.equal(res);
     });
 
     it('Test case 2', () => {
@@ -234,26 +171,7 @@ describe('Test Receipt', () => {
             'Sales Taxes: 7.65\n' +
             'Total: 65.15';
 
-        const basket = new Basket({
-            medicineKeywords: MEDICINE_KEYWORDS,
-            foodKeywords: FOOD_KEYWORDS,
-            bookKeywords: BOOK_KEYWORDS
-        });
-        const contentLines = content.split('\n');
-
-        for (const line of contentLines) {
-            basket.addItem(line);
-        }
-
-        const items = basket.getItems();
-
-        const receipt = new Receipt({ generalRate: GENERAL_RATE, importRate: IMPORT_RATE, precision: PRECISION });
-
-        for (const item of items) {
-            receipt.addItem(item);
-        }
-
-        expect(receipt.getSummary()).to.be.equal(res);
+        expect(getSummaryForContent(content)).to.be.equal(res);
     });
 
     it('Test case 3', () => {
@@ -267,25 +185,6 @@ describe('Test Receipt', () => {
             'Sales Taxes: 6.70\n' +
             'Total: 74.68';
 
-        const basket = new Basket({
-            medicineKeywords: MEDICINE_KEYWORDS,
-            foodKeywords: FOOD_KEYWORDS,
-            bookKeywords: BOOK_KEYWORDS
-        });
-        const contentLines = content.split('\n');
-
-        for (const line of contentLines) {
-            basket.addItem(line);
-        }
-
-        const items = basket.getItems();
-
-        const receipt = new Receipt({ generalRate: GENERAL_RATE, importRate: IMPORT_RATE, precision: PRECISION });
-
-        for (const item of items) {
-            receipt.addItem(item);
-        }
-
-        expect(receipt.getSummary()).to.be.equal(res);
+        expect(getSummaryForContent(content)).to.be.equal(res);
     });
 });

@@ -21,7 +21,7 @@ export declare class Basket {
     private readonly foodKeywords;
     private readonly medicineKeywords;
     private readonly bookKeywords;
-    constructor(options: BasketOptions);
+    constructor(options?: BasketOptions);
     /**
      * Adds a stringified item to the basket
      *

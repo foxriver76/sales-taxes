@@ -8,7 +8,7 @@ export declare class TaxCalculator {
     private readonly importRate;
     private readonly generalRate;
     private readonly precision;
-    constructor(options: TaxOptions);
+    constructor(options?: TaxOptions);
     /**
      * Calculates the summarized tax for a product per piece
      */

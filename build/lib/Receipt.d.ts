@@ -4,7 +4,7 @@ export declare type ReceiptOptions = TaxOptions;
 export declare class Receipt {
     private taxCalculator;
     private readonly items;
-    constructor(options: ReceiptOptions);
+    constructor(options?: ReceiptOptions);
     addItem(item: BasketItem): void;
     getSummary(): string;
 }

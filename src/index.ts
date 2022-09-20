@@ -1,10 +1,9 @@
 import yargs from 'yargs';
 import fs from 'fs';
-import path from 'path';
 import { validatePath, assertsString, readBasketConfig, readReceiptConfig } from './lib/utils';
-import { EXIT_CODES, RELATIVE_BASKET_CONFIG_PATH, RELATIVE_RECEIPT_CONFIG_PATH } from './lib/constants';
-import { Basket, BasketOptions } from './lib/Basket';
-import { Receipt, ReceiptOptions } from './lib/Receipt';
+import { EXIT_CODES } from './lib/constants';
+import { Basket } from './lib/Basket';
+import { Receipt } from './lib/Receipt';
 
 yargs
     .command(

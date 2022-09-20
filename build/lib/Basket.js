@@ -5,9 +5,16 @@ const constants_1 = require("./constants");
 class Basket {
     constructor(options) {
         this.items = [];
-        this.foodKeywords = options.foodKeywords;
-        this.medicineKeywords = options.medicineKeywords;
-        this.bookKeywords = options.bookKeywords;
+        if (options) {
+            this.foodKeywords = options.foodKeywords;
+            this.medicineKeywords = options.medicineKeywords;
+            this.bookKeywords = options.bookKeywords;
+        }
+        else {
+            this.foodKeywords = constants_1.DEFAULT_FOOD_KEYWORDS;
+            this.medicineKeywords = constants_1.DEFAULT_MEDICINE_KEYWORDS;
+            this.bookKeywords = constants_1.DEFAULT_BOOK_KEYWORDS;
+        }
     }
     /**
      * Adds a stringified item to the basket
@@ -30,10 +37,10 @@ class Basket {
         const price = parseFloat(pricePhrase);
         const countPhrase = descriptionPhrase.split(' ')[0];
         const itemPhrase = descriptionPhrase.substring(countPhrase.length + 1);
-        const isImported = itemPhrase.includes(constants_1.IMPORTED_PHRASE);
+        const isImported = itemPhrase.includes(constants_1.DEFAULT_IMPORTED_PHRASE);
         let itemName;
         if (isImported) {
-            const subphrases = itemPhrase.split(`${constants_1.IMPORTED_PHRASE} `);
+            const subphrases = itemPhrase.split(`${constants_1.DEFAULT_IMPORTED_PHRASE} `);
             itemName = subphrases.join('');
         }
         else {

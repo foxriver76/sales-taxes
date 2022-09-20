@@ -13,7 +13,7 @@ export class Receipt {
     private taxCalculator: TaxCalculator;
     private readonly items: ReceiptItem[] = [];
 
-    constructor(options: ReceiptOptions) {
+    constructor(options?: ReceiptOptions) {
         this.taxCalculator = new TaxCalculator(options);
     }
 
