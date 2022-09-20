@@ -15,6 +15,9 @@ class Basket {
      * @param item stringified item to add
      */
     addItem(item) {
+        if (!item) {
+            return;
+        }
         this.items.push(this.parseItem(item));
     }
     /**

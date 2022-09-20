@@ -6,6 +6,11 @@
  */
 export declare function roundUp(val: number, precision: number): number;
 /**
+ * Rounds value to 2 decimal places
+ * @param val value to round
+ */
+export declare function round(val: number): number;
+/**
  * Ensures given parameter is a valid absolute path and file exists
  *
  * @param filePath path to check

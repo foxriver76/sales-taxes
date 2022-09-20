@@ -8,6 +8,7 @@ const fs_1 = __importDefault(require("fs"));
 const utils_1 = require("./lib/utils");
 const constants_1 = require("./lib/constants");
 const Basket_1 = require("./lib/Basket");
+const Receipt_1 = require("./lib/Receipt");
 yargs_1.default
     .command('input <input>', 'Provide basket as direct input', yargs => yargs, argv => {
     const content = argv.input;
@@ -55,8 +56,11 @@ function handleContent(content) {
     for (const line of contentLines) {
         basket.addItem(line);
     }
-    // basket.getItems()
-    // receipt.addItem(..)
-    // receipt.printAll()
+    const items = basket.getItems();
+    const receipt = new Receipt_1.Receipt({ generalRate: constants_1.GENERAL_RATE, importRate: constants_1.IMPORT_RATE, precision: constants_1.PRECISION });
+    for (const item of items) {
+        receipt.addItem(item);
+    }
+    console.log(receipt.getSummary());
 }
 //# sourceMappingURL=index.js.map

@@ -2,7 +2,7 @@ import { BasketItem } from './Basket';
 import { CATEGORY } from './constants';
 import { roundUp } from './utils';
 
-interface TaxOptions {
+export interface TaxOptions {
     importRate: number;
     generalRate: number;
     precision: number;
@@ -20,7 +20,7 @@ export class TaxCalculator {
     }
 
     /**
-     * Calculates the summarized tax for a product
+     * Calculates the summarized tax for a product per piece
      */
     calculateTax(item: BasketItem): number {
         const basePrice = item.price;
@@ -34,6 +34,6 @@ export class TaxCalculator {
         }
 
         // not clear from description, so I guess more than one will still be price for one
-        return roundUp(item.count * totalTax, this.precision);
+        return roundUp(totalTax, this.precision);
     }
 }

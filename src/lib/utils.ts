@@ -8,7 +8,15 @@ import fs from 'fs';
  * @param precision precision to round to
  */
 export function roundUp(val: number, precision: number): number {
-    return Math.round(Math.ceil(val / precision) * precision * 100) / 100;
+    return round(Math.ceil(val / precision) * precision);
+}
+
+/**
+ * Rounds value to 2 decimal places
+ * @param val value to round
+ */
+export function round(val: number): number {
+    return Math.round(val * 100) / 100;
 }
 
 /**

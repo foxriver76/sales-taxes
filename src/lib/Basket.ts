@@ -37,6 +37,10 @@ export class Basket {
      * @param item stringified item to add
      */
     addItem(item: string): void {
+        if (!item) {
+            return;
+        }
+
         this.items.push(this.parseItem(item));
     }
 

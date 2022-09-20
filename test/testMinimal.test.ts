@@ -2,6 +2,7 @@ import { describe } from 'mocha';
 import { roundUp } from '../src/lib/utils';
 import { expect } from 'chai';
 import { Basket } from '../src/lib/Basket';
+import { TaxCalculator } from '../src/lib/TaxCalculator';
 import {
     BOOK_KEYWORDS,
     FOOD_KEYWORDS,
@@ -11,7 +12,6 @@ import {
     GENERAL_RATE,
     IMPORT_RATE
 } from '../src/lib/constants';
-import { TaxCalculator } from '../src/lib/TaxCalculator';
 
 describe('Test utils', () => {
     it('Should round correctly', async () => {
@@ -170,23 +170,22 @@ describe('Test TaxCalculator', () => {
         expect(tax).to.be.equal(1.5);
     });
 
-    it('Should calculate both taxes for three items', () => {
+    it('Should calculate both taxes for three items, still for each', () => {
         const taxCalculator = new TaxCalculator({
             generalRate: GENERAL_RATE,
             importRate: IMPORT_RATE,
             precision: PRECISION
         });
 
-        const count = 3;
-
         const tax = taxCalculator.calculateTax({
             price: 10,
             category: CATEGORY.OTHER,
             imported: true,
-            count,
+            count: 3,
             name: 'Beer'
         });
 
-        expect(tax).to.be.equal(1.5 * count);
+        // should stay the same as tax is calculated per piece
+        expect(tax).to.be.equal(1.5);
     });
 });

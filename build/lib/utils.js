@@ -3,7 +3,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.assertsString = exports.validatePath = exports.roundUp = void 0;
+exports.assertsString = exports.validatePath = exports.round = exports.roundUp = void 0;
 const path_1 = __importDefault(require("path"));
 const fs_1 = __importDefault(require("fs"));
 /**
@@ -13,9 +13,17 @@ const fs_1 = __importDefault(require("fs"));
  * @param precision precision to round to
  */
 function roundUp(val, precision) {
-    return Math.round(Math.ceil(val / precision) * precision * 100) / 100;
+    return round(Math.ceil(val / precision) * precision);
 }
 exports.roundUp = roundUp;
+/**
+ * Rounds value to 2 decimal places
+ * @param val value to round
+ */
+function round(val) {
+    return Math.round(val * 100) / 100;
+}
+exports.round = round;
 /**
  * Ensures given parameter is a valid absolute path and file exists
  *

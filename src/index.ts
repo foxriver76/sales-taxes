@@ -1,8 +1,17 @@
 import yargs from 'yargs';
 import fs from 'fs';
 import { validatePath, assertsString } from './lib/utils';
-import { BOOK_KEYWORDS, EXIT_CODES, FOOD_KEYWORDS, MEDICINE_KEYWORDS } from './lib/constants';
+import {
+    BOOK_KEYWORDS,
+    EXIT_CODES,
+    FOOD_KEYWORDS,
+    GENERAL_RATE,
+    IMPORT_RATE,
+    MEDICINE_KEYWORDS,
+    PRECISION
+} from './lib/constants';
 import { Basket } from './lib/Basket';
+import { Receipt } from './lib/Receipt';
 
 yargs
     .command(
@@ -61,7 +70,13 @@ function handleContent(content: string): void {
         basket.addItem(line);
     }
 
-    // basket.getItems()
-    // receipt.addItem(..)
-    // receipt.printAll()
+    const items = basket.getItems();
+
+    const receipt = new Receipt({ generalRate: GENERAL_RATE, importRate: IMPORT_RATE, precision: PRECISION });
+
+    for (const item of items) {
+        receipt.addItem(item);
+    }
+
+    console.log(receipt.getSummary());
 }
