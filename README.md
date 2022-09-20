@@ -4,13 +4,18 @@
 You can execute the cli by using the following command while you are inside the repository directory:
 
 ```bash
-node ./build/index.js file <absolute-path-to-file>
+node ./build/index.js file <path-to-file>
 ```
 
 use 
 
 ```bash
 node ./build/index.js --help
+```
+
+An example:
+```bash
+node ./build/index.js file test/input3.txt
 ```
 
 to list all available options.

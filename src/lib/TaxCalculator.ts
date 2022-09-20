@@ -33,7 +33,6 @@ export class TaxCalculator {
             totalTax += basePrice * this.generalRate;
         }
 
-        // not clear from description, so I guess more than one will still be price for one
         return roundUp(totalTax, this.precision);
     }
 }

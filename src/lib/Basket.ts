@@ -50,23 +50,23 @@ export class Basket {
      * @param item stringified item to parse
      */
     private parseItem(item: string): BasketItem {
-        let descriptionPhrase: string;
-        let pricePhrase: string;
-
-        if (item.includes(' at ')) {
-            [descriptionPhrase, pricePhrase] = item.split(' at ');
-        } else {
-            [descriptionPhrase, pricePhrase] = item.split(': ');
-        }
+        const [descriptionPhrase, pricePhrase] = item.split(' at ');
 
         const price = parseFloat(pricePhrase);
 
         const countPhrase = descriptionPhrase.split(' ')[0];
         const itemPhrase = descriptionPhrase.substring(countPhrase.length + 1);
 
-        const isImported = itemPhrase.startsWith(IMPORTED_PHRASE);
+        const isImported = itemPhrase.includes(IMPORTED_PHRASE);
 
-        const itemName = isImported ? itemPhrase.substring(IMPORTED_PHRASE.length + 1) : itemPhrase;
+        let itemName: string;
+
+        if (isImported) {
+            const subphrases = itemPhrase.split(`${IMPORTED_PHRASE} `);
+            itemName = subphrases.join('');
+        } else {
+            itemName = itemPhrase;
+        }
 
         const category = this.classifyItem(itemName);
 

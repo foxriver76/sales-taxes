@@ -28,13 +28,15 @@ export class Receipt {
         let taxesSummary = 0;
 
         for (const item of this.items) {
-            output += `${item.count}${item.imported ? ' imported' : ''} ${item.name}: ${round(item.totalPrice)}\n`;
+            output += `${item.count}${item.imported ? ' imported' : ''} ${item.name}: ${round(item.totalPrice).toFixed(
+                2
+            )}\n`;
             totalPriceSummary += item.count * item.totalPrice;
-            taxesSummary += item.tax;
+            taxesSummary += item.count * item.tax;
         }
 
-        output += `Sales Taxes: ${round(taxesSummary)}\n`;
-        output += `Total: ${round(totalPriceSummary)}`;
+        output += `Sales Taxes: ${round(taxesSummary).toFixed(2)}\n`;
+        output += `Total: ${round(totalPriceSummary).toFixed(2)}`;
 
         return output;
     }

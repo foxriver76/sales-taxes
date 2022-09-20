@@ -12,6 +12,8 @@ import {
     GENERAL_RATE,
     IMPORT_RATE
 } from '../src/lib/constants';
+import { Receipt } from '../src/lib/Receipt';
+import fs from 'fs';
 
 describe('Test utils', () => {
     it('Should round correctly', async () => {
@@ -67,7 +69,7 @@ describe('Test Basket', () => {
             bookKeywords: BOOK_KEYWORDS
         });
 
-        basket.addItem('3 imported box of chocolates: 10.50');
+        basket.addItem('3 imported box of chocolates at 10.50');
 
         const item = basket.getItems()[0];
 
@@ -85,7 +87,7 @@ describe('Test Basket', () => {
             bookKeywords: BOOK_KEYWORDS
         });
 
-        basket.addItem('1 imported bottle of perfume: 32.19');
+        basket.addItem('1 bottle of imported perfume at 32.19');
 
         const item = basket.getItems()[0];
 
@@ -187,5 +189,103 @@ describe('Test TaxCalculator', () => {
 
         // should stay the same as tax is calculated per piece
         expect(tax).to.be.equal(1.5);
+    });
+});
+
+describe('Test Receipt', () => {
+    it('Test case 1', () => {
+        const content = fs.readFileSync('test/input1.txt', { encoding: 'utf-8' });
+
+        const res =
+            '1 book: 12.49\n' +
+            '1 music CD: 16.49\n' +
+            '1 chocolate bar: 0.85\n' +
+            'Sales Taxes: 1.50\n' +
+            'Total: 29.83';
+
+        const basket = new Basket({
+            medicineKeywords: MEDICINE_KEYWORDS,
+            foodKeywords: FOOD_KEYWORDS,
+            bookKeywords: BOOK_KEYWORDS
+        });
+        const contentLines = content.split('\n');
+
+        for (const line of contentLines) {
+            basket.addItem(line);
+        }
+
+        const items = basket.getItems();
+
+        const receipt = new Receipt({ generalRate: GENERAL_RATE, importRate: IMPORT_RATE, precision: PRECISION });
+
+        for (const item of items) {
+            receipt.addItem(item);
+        }
+
+        expect(receipt.getSummary()).to.be.equal(res);
+    });
+
+    it('Test case 2', () => {
+        const content = fs.readFileSync('test/input2.txt', { encoding: 'utf-8' });
+
+        const res =
+            '1 imported box of chocolates: 10.50\n' +
+            '1 imported bottle of perfume: 54.65\n' +
+            'Sales Taxes: 7.65\n' +
+            'Total: 65.15';
+
+        const basket = new Basket({
+            medicineKeywords: MEDICINE_KEYWORDS,
+            foodKeywords: FOOD_KEYWORDS,
+            bookKeywords: BOOK_KEYWORDS
+        });
+        const contentLines = content.split('\n');
+
+        for (const line of contentLines) {
+            basket.addItem(line);
+        }
+
+        const items = basket.getItems();
+
+        const receipt = new Receipt({ generalRate: GENERAL_RATE, importRate: IMPORT_RATE, precision: PRECISION });
+
+        for (const item of items) {
+            receipt.addItem(item);
+        }
+
+        expect(receipt.getSummary()).to.be.equal(res);
+    });
+
+    it('Test case 3', () => {
+        const content = fs.readFileSync('test/input3.txt', { encoding: 'utf-8' });
+
+        const res =
+            '1 imported bottle of perfume: 32.19\n' +
+            '1 bottle of perfume: 20.89\n' +
+            '1 packet of headache pills: 9.75\n' +
+            '1 imported box of chocolates: 11.85\n' +
+            'Sales Taxes: 6.70\n' +
+            'Total: 74.68';
+
+        const basket = new Basket({
+            medicineKeywords: MEDICINE_KEYWORDS,
+            foodKeywords: FOOD_KEYWORDS,
+            bookKeywords: BOOK_KEYWORDS
+        });
+        const contentLines = content.split('\n');
+
+        for (const line of contentLines) {
+            basket.addItem(line);
+        }
+
+        const items = basket.getItems();
+
+        const receipt = new Receipt({ generalRate: GENERAL_RATE, importRate: IMPORT_RATE, precision: PRECISION });
+
+        for (const item of items) {
+            receipt.addItem(item);
+        }
+
+        expect(receipt.getSummary()).to.be.equal(res);
     });
 });

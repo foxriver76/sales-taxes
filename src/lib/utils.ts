@@ -20,16 +20,12 @@ export function round(val: number): number {
 }
 
 /**
- * Ensures given parameter is a valid absolute path and file exists
+ * Ensures given parameter is a valid path and file exists
  *
  * @param filePath path to check
  */
 export function validatePath(filePath: unknown): asserts filePath is string {
     assertsString(filePath);
-
-    if (!path.isAbsolute(filePath)) {
-        throw new Error('Path is not absolute, provide an absolute path');
-    }
 
     if (!fs.existsSync(filePath)) {
         throw new Error('File does not exist');

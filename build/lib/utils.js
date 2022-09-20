@@ -4,7 +4,6 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.assertsString = exports.validatePath = exports.round = exports.roundUp = void 0;
-const path_1 = __importDefault(require("path"));
 const fs_1 = __importDefault(require("fs"));
 /**
  * Rounds the given value up to the next precision value (max 2 decimal places returned)
@@ -25,15 +24,12 @@ function round(val) {
 }
 exports.round = round;
 /**
- * Ensures given parameter is a valid absolute path and file exists
+ * Ensures given parameter is a valid path and file exists
  *
  * @param filePath path to check
  */
 function validatePath(filePath) {
     assertsString(filePath);
-    if (!path_1.default.isAbsolute(filePath)) {
-        throw new Error('Path is not absolute, provide an absolute path');
-    }
     if (!fs_1.default.existsSync(filePath)) {
         throw new Error('File does not exist');
     }

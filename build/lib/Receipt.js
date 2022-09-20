@@ -17,12 +17,12 @@ class Receipt {
         let totalPriceSummary = 0;
         let taxesSummary = 0;
         for (const item of this.items) {
-            output += `${item.count}${item.imported ? ' imported' : ''} ${item.name}: ${(0, utils_1.round)(item.totalPrice)}\n`;
+            output += `${item.count}${item.imported ? ' imported' : ''} ${item.name}: ${(0, utils_1.round)(item.totalPrice).toFixed(2)}\n`;
             totalPriceSummary += item.count * item.totalPrice;
             taxesSummary += item.tax;
         }
-        output += `Sales Taxes: ${(0, utils_1.round)(taxesSummary)}\n`;
-        output += `Total: ${(0, utils_1.round)(totalPriceSummary)}`;
+        output += `Sales Taxes: ${(0, utils_1.round)(taxesSummary).toFixed(2)}\n`;
+        output += `Total: ${(0, utils_1.round)(totalPriceSummary).toFixed(2)}`;
         return output;
     }
 }
