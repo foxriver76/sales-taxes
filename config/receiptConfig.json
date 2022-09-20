@@ -1,0 +1,6 @@
+{
+  "$schema": "./schema/receiptConfig.json",
+  "generalRate": 0.1,
+  "importRate": 0.05,
+  "precision": 0.05
+}

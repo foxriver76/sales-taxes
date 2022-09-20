@@ -1,5 +1,8 @@
 import path from 'path';
 import fs from 'fs';
+import { BasketOptions } from './Basket';
+import { RELATIVE_BASKET_CONFIG_PATH, RELATIVE_RECEIPT_CONFIG_PATH } from './constants';
+import { ReceiptOptions } from './Receipt';
 
 /**
  * Rounds the given value up to the next precision value (max 2 decimal places returned)
@@ -30,6 +33,24 @@ export function validatePath(filePath: unknown): asserts filePath is string {
     if (!fs.existsSync(filePath)) {
         throw new Error('File does not exist');
     }
+}
+
+/**
+ * Reads the basket config from the file system
+ */
+export function readBasketConfig(): BasketOptions {
+    return JSON.parse(
+        fs.readFileSync(path.join(__dirname, '..', '..', RELATIVE_BASKET_CONFIG_PATH), { encoding: 'utf-8' })
+    );
+}
+
+/**
+ * Reads the receipt config from the file system
+ */
+export function readReceiptConfig(): ReceiptOptions {
+    return JSON.parse(
+        fs.readFileSync(path.join(__dirname, '..', '..', RELATIVE_RECEIPT_CONFIG_PATH), { encoding: 'utf-8' })
+    );
 }
 
 /**

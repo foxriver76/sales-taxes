@@ -1,0 +1,6 @@
+{
+  "$schema": "./schema/basketConfig.json",
+  "medicineKeywords": ["chocolate"],
+  "foodKeywords": ["pill"],
+  "bookKeywords": ["book"]
+}

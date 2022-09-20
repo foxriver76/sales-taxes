@@ -3,8 +3,10 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.assertsString = exports.validatePath = exports.round = exports.roundUp = void 0;
+exports.assertsString = exports.readReceiptConfig = exports.readBasketConfig = exports.validatePath = exports.round = exports.roundUp = void 0;
+const path_1 = __importDefault(require("path"));
 const fs_1 = __importDefault(require("fs"));
+const constants_1 = require("./constants");
 /**
  * Rounds the given value up to the next precision value (max 2 decimal places returned)
  *
@@ -35,6 +37,20 @@ function validatePath(filePath) {
     }
 }
 exports.validatePath = validatePath;
+/**
+ * Reads the basket config from the file system
+ */
+function readBasketConfig() {
+    return JSON.parse(fs_1.default.readFileSync(path_1.default.join(__dirname, '..', '..', constants_1.RELATIVE_BASKET_CONFIG_PATH), { encoding: 'utf-8' }));
+}
+exports.readBasketConfig = readBasketConfig;
+/**
+ * Reads the receipt config from the file system
+ */
+function readReceiptConfig() {
+    return JSON.parse(fs_1.default.readFileSync(path_1.default.join(__dirname, '..', '..', constants_1.RELATIVE_RECEIPT_CONFIG_PATH), { encoding: 'utf-8' }));
+}
+exports.readReceiptConfig = readReceiptConfig;
 /**
  * Ensures an argument is of type string
  *

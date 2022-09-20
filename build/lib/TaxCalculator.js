@@ -21,7 +21,6 @@ class TaxCalculator {
         if (item.category === constants_1.CATEGORY.OTHER) {
             totalTax += basePrice * this.generalRate;
         }
-        // not clear from description, so I guess more than one will still be price for one
         return (0, utils_1.roundUp)(totalTax, this.precision);
     }
 }

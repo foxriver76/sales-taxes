@@ -19,7 +19,7 @@ class Receipt {
         for (const item of this.items) {
             output += `${item.count}${item.imported ? ' imported' : ''} ${item.name}: ${(0, utils_1.round)(item.totalPrice).toFixed(2)}\n`;
             totalPriceSummary += item.count * item.totalPrice;
-            taxesSummary += item.tax;
+            taxesSummary += item.count * item.tax;
         }
         output += `Sales Taxes: ${(0, utils_1.round)(taxesSummary).toFixed(2)}\n`;
         output += `Total: ${(0, utils_1.round)(totalPriceSummary).toFixed(2)}`;

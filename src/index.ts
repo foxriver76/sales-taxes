@@ -1,17 +1,10 @@
 import yargs from 'yargs';
 import fs from 'fs';
-import { validatePath, assertsString } from './lib/utils';
-import {
-    BOOK_KEYWORDS,
-    EXIT_CODES,
-    FOOD_KEYWORDS,
-    GENERAL_RATE,
-    IMPORT_RATE,
-    MEDICINE_KEYWORDS,
-    PRECISION
-} from './lib/constants';
-import { Basket } from './lib/Basket';
-import { Receipt } from './lib/Receipt';
+import path from 'path';
+import { validatePath, assertsString, readBasketConfig, readReceiptConfig } from './lib/utils';
+import { EXIT_CODES, RELATIVE_BASKET_CONFIG_PATH, RELATIVE_RECEIPT_CONFIG_PATH } from './lib/constants';
+import { Basket, BasketOptions } from './lib/Basket';
+import { Receipt, ReceiptOptions } from './lib/Receipt';
 
 yargs
     .command(
@@ -59,11 +52,9 @@ yargs
  */
 function handleContent(content: string): void {
     // options are designed to be passed, but we use constants for now
-    const basket = new Basket({
-        medicineKeywords: MEDICINE_KEYWORDS,
-        foodKeywords: FOOD_KEYWORDS,
-        bookKeywords: BOOK_KEYWORDS
-    });
+    const basketOptions = readBasketConfig();
+
+    const basket = new Basket(basketOptions);
     const contentLines = content.split('\n');
 
     for (const line of contentLines) {
@@ -72,7 +63,8 @@ function handleContent(content: string): void {
 
     const items = basket.getItems();
 
-    const receipt = new Receipt({ generalRate: GENERAL_RATE, importRate: IMPORT_RATE, precision: PRECISION });
+    const receiptOptions = readReceiptConfig();
+    const receipt = new Receipt(receiptOptions);
 
     for (const item of items) {
         receipt.addItem(item);

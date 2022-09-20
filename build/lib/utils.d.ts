@@ -1,3 +1,5 @@
+import { BasketOptions } from './Basket';
+import { ReceiptOptions } from './Receipt';
 /**
  * Rounds the given value up to the next precision value (max 2 decimal places returned)
  *
@@ -16,6 +18,14 @@ export declare function round(val: number): number;
  * @param filePath path to check
  */
 export declare function validatePath(filePath: unknown): asserts filePath is string;
+/**
+ * Reads the basket config from the file system
+ */
+export declare function readBasketConfig(): BasketOptions;
+/**
+ * Reads the receipt config from the file system
+ */
+export declare function readReceiptConfig(): ReceiptOptions;
 /**
  * Ensures an argument is of type string
  *

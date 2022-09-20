@@ -1,6 +1,10 @@
 "use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.PRECISION = exports.GENERAL_RATE = exports.IMPORT_RATE = exports.BOOK_KEYWORDS = exports.MEDICINE_KEYWORDS = exports.FOOD_KEYWORDS = exports.IMPORTED_PHRASE = exports.CATEGORY = exports.EXIT_CODES = void 0;
+exports.RELATIVE_RECEIPT_CONFIG_PATH = exports.RELATIVE_BASKET_CONFIG_PATH = exports.PRECISION = exports.GENERAL_RATE = exports.IMPORT_RATE = exports.BOOK_KEYWORDS = exports.MEDICINE_KEYWORDS = exports.FOOD_KEYWORDS = exports.IMPORTED_PHRASE = exports.CATEGORY = exports.EXIT_CODES = void 0;
+const path_1 = __importDefault(require("path"));
 var EXIT_CODES;
 (function (EXIT_CODES) {
     EXIT_CODES[EXIT_CODES["NO_ERROR"] = 0] = "NO_ERROR";
@@ -20,4 +24,6 @@ exports.BOOK_KEYWORDS = ['book'];
 exports.IMPORT_RATE = 0.05;
 exports.GENERAL_RATE = 0.1;
 exports.PRECISION = 0.05;
+exports.RELATIVE_BASKET_CONFIG_PATH = path_1.default.join('config', 'basketConfig.json');
+exports.RELATIVE_RECEIPT_CONFIG_PATH = path_1.default.join('config', 'receiptConfig.json');
 //# sourceMappingURL=constants.js.map

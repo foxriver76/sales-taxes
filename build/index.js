@@ -47,17 +47,15 @@ yargs_1.default
  */
 function handleContent(content) {
     // options are designed to be passed, but we use constants for now
-    const basket = new Basket_1.Basket({
-        medicineKeywords: constants_1.MEDICINE_KEYWORDS,
-        foodKeywords: constants_1.FOOD_KEYWORDS,
-        bookKeywords: constants_1.BOOK_KEYWORDS
-    });
+    const basketOptions = (0, utils_1.readBasketConfig)();
+    const basket = new Basket_1.Basket(basketOptions);
     const contentLines = content.split('\n');
     for (const line of contentLines) {
         basket.addItem(line);
     }
     const items = basket.getItems();
-    const receipt = new Receipt_1.Receipt({ generalRate: constants_1.GENERAL_RATE, importRate: constants_1.IMPORT_RATE, precision: constants_1.PRECISION });
+    const receiptOptions = (0, utils_1.readReceiptConfig)();
+    const receipt = new Receipt_1.Receipt(receiptOptions);
     for (const item of items) {
         receipt.addItem(item);
     }

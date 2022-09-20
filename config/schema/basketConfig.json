@@ -1,0 +1,43 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "required": ["medicineKeywords", "foodKeywords", "bookKeywords"],
+  "additionalProperties": false,
+  "properties": {
+    "$schema": {
+      "type": "string"
+    },
+    "medicineKeywords": {
+      "type": "array",
+      "description": "Keywords which wille be mapped to category 'medicine'",
+      "minItems": 1,
+      "items": {
+        "allOf": [{
+          "type": "string"
+        }
+        ]
+      }
+    },
+    "bookKeywords": {
+      "type": "array",
+      "description": "Keywords which wille be mapped to category 'book'",
+      "minItems": 1,
+      "items": {
+        "allOf": [{
+          "type": "string"
+        }
+        ]
+      }
+    },
+    "foodKeywords": {
+      "type": "array",
+      "description": "Keywords which wille be mapped to category 'food'",
+      "minItems": 1,
+      "items": {
+        "allOf": [{
+          "type": "string"
+        }
+        ]
+      }
+    }
+  }
+}

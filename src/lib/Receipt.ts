@@ -2,7 +2,7 @@ import { BasketItem } from './Basket';
 import { TaxCalculator, TaxOptions } from './TaxCalculator';
 import { round } from './utils';
 
-type ReceiptOptions = TaxOptions;
+export type ReceiptOptions = TaxOptions;
 
 interface ReceiptItem extends BasketItem {
     tax: number;

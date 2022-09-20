@@ -13,7 +13,7 @@ export interface BasketItem {
     price: number;
 }
 
-interface BasketOptions {
+export interface BasketOptions {
     foodKeywords: string[];
     medicineKeywords: string[];
     bookKeywords: string[];

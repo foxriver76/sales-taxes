@@ -1,0 +1,32 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "required": [
+    "generalRate",
+    "importRate",
+    "precision"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "$schema": {
+      "type": "string"
+    },
+    "generalRate": {
+      "type": "number",
+      "description": "Tax rate to be applied to all non-free item categories, e.g. 5 % is 0.05",
+      "minimum": 0,
+      "maximum": 1
+    },
+    "importRate": {
+      "type": "number",
+      "description": "Tax rate to be applied to all imported items, e.g. 5 % is 0.05",
+      "minimum": 0,
+      "maximum": 1
+    },
+    "precision": {
+      "type": "number",
+      "description": "Precision to round up taxes decimal places too",
+      "minimum": 0,
+      "maximum": 1
+    }
+  }
+}

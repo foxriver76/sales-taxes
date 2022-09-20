@@ -1,7 +1,7 @@
 # TypeScript implementation of the sales taxes problem
 
 ## How-To:
-You can execute the cli by using the following command while you are inside the repository directory:
+You can execute the cli by using the following command while you are inside the repository directory (you can also start from other directories):
 
 ```bash
 node ./build/index.js file <path-to-file>
@@ -13,12 +13,15 @@ use
 node ./build/index.js --help
 ```
 
+to list all available options.
+
 An example:
 ```bash
 node ./build/index.js file test/input3.txt
 ```
 
-to list all available options.
+You can change the taxes and item classification for the cli in the config folder. Please ensure, that changes made here 
+are valid against the configured JSON schema.
 
 ## Problem description
 Basic sales tax is applicable at a rate of 10% on all goods, except books, food, and medical

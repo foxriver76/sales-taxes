@@ -11,7 +11,7 @@ export interface BasketItem {
     /** price of the item */
     price: number;
 }
-interface BasketOptions {
+export interface BasketOptions {
     foodKeywords: string[];
     medicineKeywords: string[];
     bookKeywords: string[];
@@ -45,4 +45,3 @@ export declare class Basket {
      */
     getItems(): BasketItem[];
 }
-export {};
