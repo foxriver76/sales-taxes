@@ -39,6 +39,8 @@ yargs_1.default
         process.exit(constants_1.EXIT_CODES.ERROR);
     }
 })
+    .strictCommands()
+    .demandCommand()
     .parse();
 /**
  * Handles the content passed to the cli

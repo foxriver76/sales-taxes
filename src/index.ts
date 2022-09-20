@@ -42,6 +42,8 @@ yargs
             }
         }
     )
+    .strictCommands()
+    .demandCommand()
     .parse();
 
 /**
